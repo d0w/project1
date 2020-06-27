@@ -6,7 +6,7 @@ from helpers import get_goodreads
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flask import Flask, session, render_template, request, redirect, url_for
+from flask import Flask, session, render_template, request, redirect, url_for, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -169,29 +169,24 @@ def api(isbn_id):
         if goodreads.status_code !=200:
             return render_template("error.html", message="404 Error")
         else:
-            book_api = goodreads.json()
-            return book_api
+            book_api_other = goodreads.json()
+            return book_api_other
     else:
-        book_reviews = db.execute("SELECT COUNT(ID), AVG(stars) FROM reviews WHERE bookid = :bookid",
-                    {"bookid": book_api.id})
+        book_reviews = db.execute("SELECT COUNT(id), AVG(stars) FROM reviews WHERE bookid = :bookid",
+                    {"bookid": book_api.id}).fetchone()
+
+    book_reviews = db.execute("SELECT COUNT(id), AVG(stars) FROM reviews WHERE bookid = :bookid",
+                    {"bookid": book_api.id}).fetchone()
 
 
-    response = {}
-    response["title"] = book_api.title
-    response["author"] = book_api.author
-    response["year"] = book_api.year
-    response["isbn"] = book_api.isbn
-
-    try:
-        response["review_count"] = str(book_reviews[0])
-        response["average_score"] = book_reviews[1]
-    except:
-        response["review_count"] = "No reviews"
-        response["average_score"] = "No reviews"
-
-    jsonResponse = json.dumps(response)
-
-    return jsonResponse, 200
+    return jsonify({
+            "title": book_api.title,
+            "author": book_api.author,
+            "year": book_api.year,
+            "isbn": book_api.isbn,
+            "review_count": str(book_reviews[0]),
+            "average_score": str(book_reviews[1])
+        }), 200
 
 
 
