@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+<h1>Login</h1>
+
+
+<div id="homeLogin">
+
+    <form>
+        <div class="form-group">
+          <label for="loginEmail">Email address</label>
+          <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="passwordLogin">Password</label>
+          <input type="password" class="form-control" id="passwordLogin" placeholder="Password">
+        </div>
+
+        <!--Can use <div class="form-check"> for check box-->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+</div>
+
+
+
+        
+
+
+
+{% endblock %}

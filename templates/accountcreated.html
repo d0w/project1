@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Created!
+{% endblock %}
+
+{% block body %}
+<h1>Account Created</h1>
+
+<div>
+    Return to Login Page
+    <form action="{{ url_for('index') }}">
+        <button>Return</button>
+    </form>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+<h1>Create Account</h1>
+
+<form action="{{ url_for('register') }}" method="post">
+    <div name="register" class="login-screen">
+        <input class="form-control" type="text" name="username" placeholder="username">
+        <input class="form-control" type="text" name="pass" placeholder="password">
+        <input class="form-control" type="text" name="name" placeholder="name">
+    </div>
+    <div class="login-screen">
+        <button class="btn btn-primary btn-large btn-block">Register</button>
+    </div>
+
+</form>
+
+
+{% endblock %}

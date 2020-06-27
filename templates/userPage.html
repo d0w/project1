@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+    <h1>User Page</h1>
+    <br />
+    Welcome {{ user }}
+    <br />
+
+    <div name="userSearch">
+        <div class="form-group">
+            <form action="{{ url_for('search') }}" method="post">
+                <p>Search by Title, Author, or ISBN</p>
+                <input class="form-control" name="search" placeholder="Title/Author/ISBN">
+                <button class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

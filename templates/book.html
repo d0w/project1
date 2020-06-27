@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Book
+{% endblock %}
+
+{% block body %}
+    <h1>{{ book.title }} by {{ book.author }}</h1>
+    <br />
+
+    <p><a href="{{ url_for('index') }}">Search</a></p>
+
+    <div class="row book-container">
+        <div class="col-sm-4">
+            <b>Title: </b> {{ book.title }}<br />
+            <b>Author: </b> {{ book.author }}<br />
+            <b>Year: </b> {{ book.year }}<br />
+            <b>ISBN: </b> {{ book.isbn }}<br />
+            <b>Goodreads Average Review:</b> <a href="https://www.goodreads.com/search?q={{ book.isbn }}">{{ bookRating }}</a><br />
+        </div>
+    </div>
+    <div>
+        <br />
+        <div class="bg-light">
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="mb-1">
+                    <b>{{ review.username }}</b> gave {{review.stars }} and said: {{review.review}} 
+                </div>
+                {% endfor %}
+            {% else %}
+            <p>No Reviews</p>
+            {% endif %}
+        </div>
+        <br />
+
+        <h4>Add a Review</h4>
+        <br />
+        
+        <div class="form-group">
+            <form action="{{ url_for('review', book_id=book.id) }}" method="post">
+                <p>Stars</p> 
+
+                <select name="stars">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select> 
+            <br />
+            <textarea type="textarea" name="review" placeholder="Enter Review Here" rows="5" cols="40" draggable="false"></textarea>
+            <br />
+            <button class = "btn btn-primary btn-large btn-block">Submit Review</button>
+        </div>
+
+
+        </form>
+
+
+
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Error
+{% endblock %}
+
+{% block body %}
+    <h1>Error</h1>
+
+    {{ message }}
+
+    <div>
+        <p>
+
+            
+        </p>
+    </div>
+
+    <div align="center">
+        <form action="{{ url_for('index') }}">
+            <button>Return to Login</button>
+        </form>
+    </div>  
+
+{% endblock %}
